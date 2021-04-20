@@ -1,12 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>海賊リーグ</title>
 </head>
 <body>
-    {% block content %}{% endblock  %}
+    <header>
+        <h1><a href="{% url 'league:index' %}">海賊リーグ</a></h1>
+
+        {% if request.user.is_authenticated %}
+            {% comment %} <a href="{% url 'league:users_detail' request.user.id %}">マイページ</a> {% endcomment %}
+            <a href="{% url 'league:logout' %}">ログアウト</a>
+        {% else %}
+            <a href="{% url 'league:login' %}">ログイン</a>
+        {% endif %}
+    </header>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
